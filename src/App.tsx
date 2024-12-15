@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { Sheet } from "./components/ui/sheet";
 import { NavBar } from "./components/NavBar";
 import { CodeEditor } from "./components/CodeEditor";
+import { Toaster } from "@/components/ui/sonner"
 
 function App() {
   const [isActive, toggle] =useAtom(useSheetToggle)
@@ -14,6 +15,7 @@ function App() {
         <CodeEditor />
       </Sheet>
         <ConvexSchemaViz />
+        <Toaster position="bottom-left"/>
     </main>
   );
 }

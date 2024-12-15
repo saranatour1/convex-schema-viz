@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   Handle,
   type Node,
@@ -5,7 +6,6 @@ import {
   Position,
   useUpdateNodeInternals,
 } from "@xyflow/react";
-import clsx from "clsx";
 import { useEffect } from "react";
 
 type TableNode = Node<Table, "table">;
@@ -14,8 +14,6 @@ export const TableNode = ({ id, data: table }: NodeProps<TableNode>) => {
   const updateNodeInternals = useUpdateNodeInternals();
 
   useEffect(() => {
-    // need to call this to have the edges render
-    // because we are dynamically creating handles.
     updateNodeInternals(id);
   }, [id, updateNodeInternals]);
 
@@ -41,7 +39,7 @@ export const TableNode = ({ id, data: table }: NodeProps<TableNode>) => {
         >
           <span>{field.name}</span>
 
-          <span className={clsx(field.hasReference && "capitalize")}>
+          <span className={cn(field.hasReference && "capitalize")}>
             {field.hasReference ? field.referenceTable : field.type}
             {field.type === "array" && "[ ]"}
           </span>
@@ -52,7 +50,6 @@ export const TableNode = ({ id, data: table }: NodeProps<TableNode>) => {
               id={`${table.name}-${field.referenceTable}`}
               type="source"
               style={{ top: 32 + 16 + 32 * index }}
-              // header size 32, field height 32/2 = center point,
             />
           )}
         </div>
